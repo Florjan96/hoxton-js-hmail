@@ -1,5 +1,14 @@
 import './style.css'
 
+type Email={
+  from:string
+  header:string
+  content:string
+  email:string
+  img:string
+  read:boolean
+}
+
 const state = {
   emails: [
     {
@@ -33,11 +42,17 @@ const state = {
     // feel free to add more emails here
   ]
 }
-console.log(state)
+
 
 function emailList(){
 
-  
+  let eList=document.querySelector(".email-list")
+
+let inbox=document.createElement('h1')
+inbox.textContent="Inbox"
+eList.append(inbox)
+
+console.log(eList)
 // <h1>Inbox</h1>
 // <ul class="emails-list">
 //   <li class="emails-list__item">
@@ -52,10 +67,9 @@ function emailList(){
 //   </li>
 // </ul>
 for (let email of state.emails){
-  let eList=document.querySelector(".email-list")
+  
+ 
 
-let inbox=document.createElement('h1')
-inbox.textContent="Inbox"
 
 let emailListUl=document.createElement('ul')
 emailListUl.className="emails-list"
@@ -63,28 +77,57 @@ emailListUl.className="emails-list"
 let liItem=document.createElement('li')
 liItem.className="emails-list__item"
 
- 
+liItem.addEventListener("click", ()=>{
+  eList.textContent=''
+//   <section class="single-email">
+//   <button class="single-email__button">⬅Back</button>
+//   <div class="single-email__sender-section">
+//     <img class="single-email__image" src="assets/nico.JPG" />
+//     <span class="single-email__sender">Nico (nico@email.com)</span>
+//   </div>
+//   <h1 class="single-email__header">Link to today's video and slides is up!</h1>
+//   <p class="single-email__content">
+//     Link is up and you know where to find it! Lorem ipsum dolor sit amet
+//     consectetur, adipisicing elit. Adipisci quo et assumenda voluptas blanditiis
+//     incidunt quia in, accusamus, qui voluptatem porro. Est reiciendis cum a
+//     architecto earum voluptatibus vel atque.
+//   </p>
+// </section>
+
+let button=document.createElement('button')
+button.className="single-email__button"
+button.textContent="⬅Back"
+
+let main=document.querySelector("main")
+main.append(button)
+
+
+
+})
 let span=document.createElement('span')
 span.className="emails-list__item__read-icon material-symbols-outlined"
 span.textContent=" mark_email_unread"
 
 let img=document.createElement('img')
 img.className="emails-list__item__image"
-img.src="assets/nico.JPG" 
+img.src=email.img
 
 let name=document.createElement('p')
 name.className="emails-list__item__from"
-name.textContent="Nico"
+name.textContent=email.from
 
 let content=document.createElement('p')
 content.className="emails-list__item__content"
-content.textContent="Link to today's video and slides is up!"
+content.textContent=email.content
 
 
 liItem.append(span,img,name,content)
 emailListUl.append(liItem)
-eList.append(emailListUl,inbox)
+eList.append(emailListUl)
 
 }
 }
 emailList()
+
+
+// When a user clicks the email - render the page for that single email
