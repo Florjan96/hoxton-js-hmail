@@ -4,19 +4,24 @@ type Email={
   from:string
   header:string
   content:string
-  email:string
+  emailAdress:string
   img:string
   read:boolean
 }
 
-const state = {
+type State={
+  emails:Array<Email>;
+
+};
+
+const state:State = {
   emails: [
     {
       from: 'Nico',
       header: "Link to today's video and slides is up!",
       content:
         'Link is up and you know where to find it! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci quo et assumenda voluptas blanditiis incidunt quia in, accusamus, qui voluptatem porro. Est reiciendis cum a architecto earum voluptatibus vel atque.',
-      emailAddress: 'nico@email.com',
+      emailAdress: 'nico@email.com',
       img: 'assets/nico.JPG',
       read: false
     },
@@ -93,17 +98,47 @@ liItem.addEventListener("click", ()=>{
 //     architecto earum voluptatibus vel atque.
 //   </p>
 // </section>
+let section=document.createElement('section')
+section.className="single-email"
 
 let button=document.createElement('button')
 button.className="single-email__button"
 button.textContent="⬅Back"
+// let main=document.querySelector("main")
+// main.append(button)
+let div=document.createElement('div')
+div.className="single-email__sender-section"
 
+let  img=document.createElement('img')
+img.className="single-email__image"
+img.src="assets/nico.JPG"
+
+let span=document.createElement('span')
+span.className="single-email__sender"
+span.textContent='Nico (nico@email.com)'
+
+let h1=document.createElement('h1')
+h1.className="single-email__header"
+h1.textContent="Link to today's video and slides is up!"
+
+let pContent=document.createElement('p')
+pContent.className="single-email__content"
+pContent.textContent= 'Link is up and you know where to find it! Lorem ipsum dolor sit amet'
+
+div.append(img,span)
+section.append(div,button,h1,pContent)
 let main=document.querySelector("main")
-main.append(button)
+main.append(section)
+console.log(main)
+
 
 
 
 })
+
+
+
+
 let span=document.createElement('span')
 span.className="emails-list__item__read-icon material-symbols-outlined"
 span.textContent=" mark_email_unread"
@@ -130,4 +165,4 @@ eList.append(emailListUl)
 emailList()
 
 
-// When a user clicks the email - render the page for that single email
+
